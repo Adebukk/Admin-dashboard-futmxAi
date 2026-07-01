@@ -1,10 +1,13 @@
 'use client';
-
+import dotenv from 'dotenv';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
 import { UserPlus, Mail, Lock, User } from 'lucide-react';
+// Import the functions you need from the SDKs you need
+
+
 
 export default function SignupPage() {
   const router = useRouter();
@@ -47,7 +50,7 @@ export default function SignupPage() {
                 required
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none border-[#0f46acc9] -400 transition
+                className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-[#0f46acc9] rounded-xl outline-none border-[#0f46acc9]-400 transition
                 input: text-slate-700"
                 // placeholder="John Doe"
               />
@@ -58,7 +61,7 @@ export default function SignupPage() {
             <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
             <div className="relative">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className ="w-full pl-11 pr-4 py-3 input: text-slate-700 bg-slate-50 border border-slate-200 rounded-xl outline-none border-[#0f46acc9] -400 transition placeholder:text-slate-400" placeholder="staff.name@futminna.edu.ng" />
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className ="w-full pl-11 pr-4 py-3 input: text-slate-700 bg-slate-50 border border-[#0f46acc9] rounded-xl outline-none border-[#0f46acc9]-400 transition placeholder:text-slate-400" placeholder="staff.name@futminna.edu.ng" />
             </div>
           </div>
 
@@ -72,7 +75,7 @@ export default function SignupPage() {
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none border-[#0f46acc9] -400 transition
+                className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-[#0f46acc9] rounded-xl outline-none border-[#0f46acc9]-400 transition
                 input: text-slate-700"
                 placeholder="At least 6 characters"
               />
