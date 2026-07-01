@@ -3,7 +3,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FileUp, FileText, CheckCircle, FileCheck } from "lucide-react";
-import { auth } from "@/lib/firebaseAdmin";
+import { auth } from "@/lib/firebase";
+// import { auth } from "@/lib/firebaseAdmin";
 
 const FACULTIES = {
   SEET: [
@@ -46,7 +47,7 @@ export default function DashboardPage() {
 
     setUploading(true);
     try {
-      const currentUser = auth.getUser;
+      const currentUser = auth.currentUser;
       if (!currentUser) {
         toast.error("You must be logged in to uplaod files");
         setUploading(false);
@@ -55,7 +56,6 @@ export default function DashboardPage() {
       const token = await currentUser.getIdToken();
 
       const formData = new FormData();
-
       formData.append("file", file);
       formData.append("faculty", faculty);
       formData.append("department", department);
@@ -67,7 +67,7 @@ export default function DashboardPage() {
           body: `${formData}`,
         },
       });
-      const data = await response.json;
+      const data = await response.json();
       if (!response.ok) {
         throw new Error(data.error || "something went wrong during ingestion");
       }
@@ -78,12 +78,13 @@ export default function DashboardPage() {
         date: new Date().toLocaleDateString(),
       };
       setHistory([newRecord, ...history]); // Add to top of list
-      toast.success("Handbook uploaded and processed by AI!");
+      toast.success(data.message || "Handbook uploaded and processed by AI!");
 
       setFile(null);
       setDepartment("");
+
     } catch (error: any) {
-      console.log(error(""));
+      console.log(error("Upload failed:", error));
       toast.error(error.message || " Failed to upload handbook");
     } finally {
       setUploading(false);

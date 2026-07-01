@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuth } from "firebase-admin/auth";
 import { Pinecone } from "@pinecone-database/pinecone";
-import '@/lib/firebaseAdmin';
+import { auth } from "@/lib/firebaseAdmin";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
 const index = pc.index({ name: process.env.PINECONE_INDEX_NAME! });
@@ -16,33 +15,35 @@ export async function POST(req: NextRequest) {
       );
     }
     const token = authHeader.split("Bearer  ")[1];
-    const decodedToken = await getAuth().verifyIdToken(token);
+    const decodedToken = await auth.verifyIdToken(token);
     const StaffID = decodedToken.uid;
     const formData = await req.formData();
     const file = formData.get("file") as File;
+    const faculty = formData.get("faculty") as string;
+    const department = formData.get("department") as string;
+
     if (!file) {
       return NextResponse.json({ error: "NO FILE UPLOADED" }, { status: 400 });
     }
     const textContent = await file.text();
-
     const textChunk = textContent.slice(0, 500);
-    const mockEmbedding: number[] = [];
+    const mockEmbedding: number[] = new Array(1536).fill(0);
 
-    await index.upsert(
-      {
-        records: [
-          {
-            id: `${file.name}-${Date.now()}`,
-            values: mockEmbedding,
-            metadata: {
-              filename: file.name,
-              uploadedBy: StaffID,
-              content: textChunk,
-            },
+    await index.upsert({
+      records: [
+        {
+          id: `${file.name.replace(/\.[^/.]+$/, "")}-${Date.now()}`,
+          values: mockEmbedding,
+          metadata: {
+            filename: file.name,
+            uploadedBy: StaffID,
+            content: textChunk,
+            faculty: faculty,
+            department: department,
           },
-        ],
-      }
-    );
+        },
+      ],
+    });
     return NextResponse.json({
       success: true,
       message: "Document uploaded successfully",
