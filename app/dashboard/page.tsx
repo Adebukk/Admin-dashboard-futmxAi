@@ -37,7 +37,7 @@ export default function DashboardPage() {
   const [department, setDepartment] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-
+  const [time, setTime]= useState("")
   // Local state to hold our fake uploads during the presentation
   const [history, setHistory] = useState<UploadRecord[]>([]);
 
