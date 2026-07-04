@@ -56,7 +56,7 @@ export default function LoginPage() {
           <div className="inline-block p-4 bg-[#0f46ac] -100 rounded-2xl mb-4">
             <Lock className="w-6 h-6 text-[#ffffff]" />
           </div>
-          <h1 className="text-2xl font-bold text-[#0f46ac]">Admin Login</h1>
+          <h1 className="text-2xl font-bold text-[#0f46ac]">FUTMINNA <br /> Admin Login</h1>
           {/* <p className="text-slate-500 text-sm mt-2">Eng Assist Handbook Portal</p> */}
         </div>
 

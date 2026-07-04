@@ -3,11 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { LogOut, FileUp, BookOpen } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { divide } from 'firebase/firestore/pipelines';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dummyAdminEmail = "staff.admin@futminna.edu.ng"; // Hardcoded for frontend demo
-
+  // const = 
   const handleLogout = () => {
     toast.success('Logged out successfully');
     router.push('/login');
@@ -18,7 +19,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <Toaster position="top-center" />
       
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-slate-200 p-6 flex flex-col">
+      {<>
+      <div className={'w-'}>
+
+      </div>
+      </>}
+      <aside className="hidden w-64 bg-white border-r border-slate-200 p-6 md:flex flex-col">
         <div className="flex items-center gap-3 mb-10">
           <div className="p-2 bg-[#0f46ac] -100 rounded-xl">
             <BookOpen className="w-4 h-4 text-[#ffffff]" />

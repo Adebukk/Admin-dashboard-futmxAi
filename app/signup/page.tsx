@@ -44,7 +44,7 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#ffffff] -100  to-slate-100 px-4">
       <Toaster position="top-center" />
-      <div className="w-full max-w-md bg-white p-10 rounded-3xl shadow-sm border    ">
+      <div className="w-full max-w-md bg-white px-10 py-5 rounded-3xl shadow-sm border ">
         <div className="text-center mb-8">
           <div className="inline-block p-4 bg-[#0f46ac] -100 rounded-2xl mb-4">
             <UserPlus className="w-6 h-6 text-[#ffffff] " />

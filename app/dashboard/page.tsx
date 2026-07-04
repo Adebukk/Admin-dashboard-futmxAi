@@ -37,7 +37,6 @@ export default function DashboardPage() {
   const [department, setDepartment] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [time, setTime]= useState("")
   // Local state to hold our fake uploads during the presentation
   const [history, setHistory] = useState<UploadRecord[]>([]);
 
@@ -82,7 +81,6 @@ export default function DashboardPage() {
 
       setFile(null);
       setDepartment("");
-
     } catch (error: any) {
       console.log(error("Upload failed:", error));
       toast.error(error.message || " Failed to upload handbook");
@@ -134,8 +132,8 @@ export default function DashboardPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
-              Select Program
+            <label className="block text-sm  whitespace-nowrap font-semibold text-slate-700 mb-2">
+              Select Department
             </label>
             <select
               required
@@ -144,7 +142,7 @@ export default function DashboardPage() {
               disabled={!faculty}
               className="w-full px-4 py-3 text-slate-700 bg-slate-50 border  rounded-xl outline-none border-[#0f46acc9] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <option value="">-- Choose a program --</option>
+              <option value="">-- Choose a department --</option>
               {faculty &&
                 FACULTIES[faculty as keyof typeof FACULTIES].map((d) => (
                   <option key={d} value={d}>
@@ -169,7 +167,7 @@ export default function DashboardPage() {
             {file ? (
               <div className="flex flex-col items-center gap-2">
                 <CheckCircle className="w-10 h-10 text-green-500" />
-                <p className="font-semibold text-slate-700">{file.name}</p>
+                <p className="font-semibold text-slate-700">{file.name.slice(0,17)}</p>
                 <p className="text-xs text-slate-500">Ready to upload</p>
               </div>
             ) : (
