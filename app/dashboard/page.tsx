@@ -4,7 +4,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FileUp, FileText, CheckCircle, FileCheck } from "lucide-react";
 import { auth } from "@/lib/firebase";
-// import { auth } from "@/lib/firebaseAdmin";
 
 const FACULTIES = {
   SEET: [
@@ -22,6 +21,7 @@ const FACULTIES = {
     "Civil Engineering",
     "Food Engineering",
   ],
+  SICT: ["Computer Science"],
 };
 
 // Defining the shape of our mock data
@@ -52,7 +52,7 @@ export default function DashboardPage() {
         setUploading(false);
         return;
       }
-      const token = await currentUser.getIdToken();
+      const token = await currentUser.getIdToken(true);
 
       const formData = new FormData();
       formData.append("file", file);
@@ -63,15 +63,15 @@ export default function DashboardPage() {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          body: `${formData}`,
         },
+        body: formData,
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || "something went wrong during ingestion");
+        throw new Error(data.error || data.details || "something went wrong during ingestion");
       }
       const newRecord: UploadRecord = {
-        id: `${file.name}- ${Date.now()}`,
+        id: `${file.name}`,
         dept: department,
         filename: file.name,
         date: new Date().toLocaleDateString(),
@@ -82,7 +82,7 @@ export default function DashboardPage() {
       setFile(null);
       setDepartment("");
     } catch (error: any) {
-      console.log(error("Upload failed:", error));
+      console.log("Upload failed:", error);
       toast.error(error.message || " Failed to upload handbook");
     } finally {
       setUploading(false);
@@ -128,6 +128,9 @@ export default function DashboardPage() {
               <option value="SIPET" className="text-slate-700">
                 SIPET
               </option>
+              <option value="SICT" className="text-slate-700">
+                SICT
+              </option>
             </select>
           </div>
 
@@ -167,7 +170,9 @@ export default function DashboardPage() {
             {file ? (
               <div className="flex flex-col items-center gap-2">
                 <CheckCircle className="w-10 h-10 text-green-500" />
-                <p className="font-semibold text-slate-700">{file.name.slice(0,17)}</p>
+                <p className="font-semibold text-slate-700">
+                  {file.name.slice(0, 17)}
+                </p>
                 <p className="text-xs text-slate-500">Ready to upload</p>
               </div>
             ) : (

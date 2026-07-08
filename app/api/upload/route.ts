@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         { status: 401 },
       );
     }
-    const token = authHeader.split("Bearer  ")[1];
+    const token = authHeader.split("Bearer ")[1]?.trim();
     const decodedToken = await auth.verifyIdToken(token);
     const StaffID = decodedToken.uid;
     const formData = await req.formData();
@@ -27,12 +27,12 @@ export async function POST(req: NextRequest) {
     }
     const textContent = await file.text();
     const textChunk = textContent.slice(0, 500);
-    const mockEmbedding: number[] = new Array(1536).fill(0);
+    const mockEmbedding: number[] = new Array(1024).fill(0.1);
 
     await index.upsert({
       records: [
         {
-          id: `${file.name.replace(/\.[^/.]+$/, "")}-${Date.now()}`,
+          id: `${file.name.replace(/\.[^/.]+$/, "")}`,
           values: mockEmbedding,
           metadata: {
             filename: file.name,

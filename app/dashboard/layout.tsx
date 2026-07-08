@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { LogOut, FileUp, BookOpen } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { divide } from 'firebase/firestore/pipelines';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();

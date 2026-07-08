@@ -18,9 +18,9 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    const staffEmailRegex = /^[a-zA-Z]+\.[a-zA-Z]+@futminna\.edu\.ng$/ ;
-    // const studentEmailRegex=  /^[a-zA-Z]+\.[a-zA-Z0-9]+@st.futminna\.edu\.ng$/ 
-    if (!staffEmailRegex.test(email)) {
+    // const staffEmailRegex = /^[a-zA-Z]+\.[a-zA-Z]+@futminna\.edu\.ng$/ ;
+    const studentEmailRegex=  /^[a-zA-Z]+\.[a-zA-Z0-9]+@st.futminna\.edu\.ng$/ 
+    if (!studentEmailRegex.test(email)) {
       setLoading(false);
       toast.error("Email must be in the format staff.name@futminna.edu.ng");
       return;
