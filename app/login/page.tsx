@@ -32,7 +32,7 @@ export default function LoginPage() {
       toast.success("Welcome back, Admin!");
       router.push("/dashboard"); // Go to dashboard
     } catch (error: any) {
-      console.error("Login error: ", error);
+      // console.error("Login error: ", error);
       let errorMessage = "Failed to Login in. Please check you credentials";
       if (
         error.code === "auth/invalid/credential" ||

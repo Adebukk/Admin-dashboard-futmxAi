@@ -33,7 +33,7 @@ export default function SignupPage() {
       toast.success("Account created successfully!");
       router.push("/login"); // Send them back to login page
     } catch (error: any) {
-      console.error("Signup error:", error);
+      // console.error("Signup error:", error);
       const errorMessage = error.message.replace("Firebase:", "");
       toast.error(errorMessage || "Failed to create account");
     } finally {

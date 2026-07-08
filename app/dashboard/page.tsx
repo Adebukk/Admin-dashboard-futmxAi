@@ -82,7 +82,7 @@ export default function DashboardPage() {
       setFile(null);
       setDepartment("");
     } catch (error: any) {
-      console.log("Upload failed:", error);
+      // console.log("Upload failed:", error);
       toast.error(error.message || " Failed to upload handbook");
     } finally {
       setUploading(false);

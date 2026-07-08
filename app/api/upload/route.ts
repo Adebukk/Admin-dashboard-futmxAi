@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       message: "Document uploaded successfully",
     });
   } catch (error: any) {
-    console.log("Ingestion Error ", error);
+    // console.log("Ingestion Error ", error);
     return NextResponse.json(
       { error: "Internal Server Error", details: error.message },
       { status: 500 },

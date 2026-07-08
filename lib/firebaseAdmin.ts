@@ -12,9 +12,9 @@ if (!getApps().length) {
         privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
       }),
     });
-    console.log("Firebase Admin initialized successfully.");
+    // console.log("Firebase Admin initialized successfully.");
   } catch (error) {
-    console.error("Firebase Admin initialization error:", error);
+    // console.error("Firebase Admin initialization error:", error);
   }
 } 
 
