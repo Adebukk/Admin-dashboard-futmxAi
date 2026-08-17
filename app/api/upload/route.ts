@@ -90,9 +90,9 @@ export async function POST(req: NextRequest) {
           id: `${file.name.replace(/\.[^/.]+$/, "")}-chunk-${globalChunkIndex}-${crypto.randomUUID()}`,
           values: embeddingsList[indexInBatch].values,
           metadata: {
-            filename: file.name,
+            source_document: file.name,
             uploadedBy: StaffID,
-            content: chunkText, // The AI saves this specific piece of text
+            chunk_text: chunkText, // The AI saves this specific piece of text
             chunkIndex: globalChunkIndex, // Saves the page/order number
             faculty: faculty,
             department: department,
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
       //     : (embeddingResponse as any)[0].values;
       //  console.log("Here ooo", realVectorData);
       // //  console.log("Another one", textChunk[0].slice(0,255))
-      await index.namespace("newer-namespace").upsert({
+      await index.namespace("student-handbook-namespace").upsert({
         records: records,
       });
       totalUpserted += records.length;
