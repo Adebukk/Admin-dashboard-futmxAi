@@ -48,7 +48,7 @@ export default function DashboardPage() {
     try {
       const currentUser = auth.currentUser;
       if (!currentUser) {
-        toast.error("You must be logged in to uplaod files");
+        toast.error("You must be logged in to upload files");
         setUploading(false);
         return;
       }
@@ -82,7 +82,7 @@ export default function DashboardPage() {
       setFile(null);
       setDepartment("");
     } catch (error: any) {
-      // console.log("Upload failed:", error);
+      console.log("Upload failed:", error);
       toast.error(error.message || " Failed to upload handbook");
     } finally {
       setUploading(false);
@@ -190,6 +190,7 @@ export default function DashboardPage() {
         </div>
 
         <button
+
           type="submit"
           disabled={uploading || !file || !faculty || !department}
           className="w-full bg-[#0f46ac] text-white py-3 rounded-xl font-semibold hover:bg-[#0f46acc9] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
@@ -209,13 +210,13 @@ export default function DashboardPage() {
             {history.map((record) => (
               <div
                 key={record.id}
-                className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100"
+                className="flex items-center flex-wrap justify-between p-4 bg-slate-50 rounded-xl border border-slate-100"
               >
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-green-100 rounded-lg">
                     <FileCheck className="w-5 h-5 text-green-600" />
                   </div>
-                  <div>
+                  <div >
                     <p className="font-semibold text-sm text-slate-800">
                       {record.dept}
                     </p>
